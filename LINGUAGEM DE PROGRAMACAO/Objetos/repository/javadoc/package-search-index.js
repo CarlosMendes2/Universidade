@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"banco.entidades"},{"l":"banco.entidades.util"},{"l":"banco.excecoes"}];updateSearchResults();
