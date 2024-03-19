@@ -1,13 +1,13 @@
 def contemVogal(a): #01
     palavra = a.upper()
     vogal = ["A","E","I","O","U"]
-    for i in range(len(palavra)): ## Atenssaum
+    for i in range(len(palavra)): 
         if(palavra[i] in vogal):
             return True
     return False
 
 def contaPalavra(a): #02
-    frase = a.split()    # Atenssaum split() =! list() | método e parametro
+    frase = a.split()    
     return len(frase)
 
 
@@ -15,7 +15,7 @@ def contaPalavra(a): #02
 def contaInicioVogal(a): #03
     vogal = ["A","E","I","O","U"]
     contador = 0
-    for i in range(len(a)):           #Atenssaum tanso - > for foi confudido com if
+    for i in range(len(a)):           
         if(a[i][0].upper() in vogal):
             contador += 1
     return contador
@@ -24,10 +24,10 @@ def contaInicioVogal(a): #03
 def contaMaisDe3(a): #04
     vogal = ["A","E","I","O","U"]
     contador = 0
-    for i in range(len(a)):                  #Atenssaum nome do parametro 
+    for i in range(len(a)):                 
         cont = 0                            
         for j in range(len(a[i])):       
-            if(a[i][j].upper() in vogal):  #Atenssaum para upper()
+            if(a[i][j].upper() in vogal):  
                 cont+=1
         if (cont>= 3):
             contador+=1
@@ -36,7 +36,7 @@ def contaMaisDe3(a): #04
 def contaTotalH(a):
     contador = 0
     for i in range(len(a)):
-        for j in range(len(a[i])):       #Atenssaum pra o i e j dos for multi
+        for j in range(len(a[i])):       
             if(a[i][j].upper() == "H"):
                 contador += 1
     return contador
