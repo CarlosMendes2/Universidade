@@ -6,33 +6,28 @@ import java.util.List;
 
 public class Post {
     private String post;
-    private List<Usuario> likes;
-    private LocalDate dataAgora;
-    private LocalTime tempoAgora;
+    private final List<Usuario> likes;
+    private final LocalDate dataAgora;
+    private final LocalTime tempoAgora;
 
 
     public Post(String post) {
-        try {
-            isPostInvalido(post);
-        }catch (IllegalArgumentException nsfe){
-            throw new IllegalArgumentException("Entrada inválida");
-        }
         this.post = post;
         this.dataAgora = LocalDate.now();
         this.tempoAgora = LocalTime.now();
         this.likes = new ArrayList<>();
     }
-    public boolean isPostInvalido(String post){
-        if (post == null){
-            throw new IllegalArgumentException("Entrada Null!");
-        }
-        if (post.isEmpty() || post.isBlank()){
-            throw new IllegalArgumentException("Entrada em branco ou vazia!");
+    public static boolean isPostInvalido(String post){
+        if (post.isEmpty() || post.isBlank() || post == null){
+            return true;
         }
         return false;
     }
-    public void setPost(String postEdit) {
-        this.post = postEdit;
+    public boolean setPost(String postEdit) {
+        if (isPostInvalido(post)){
+            this.post = postEdit;
+            return true;
+        }return false;
     }
 
     public String getPost() {
@@ -42,10 +37,10 @@ public class Post {
     public List<Usuario> getLikes() {
         return likes;
     }
-
     public void setLikes(Usuario usuarioLikes) {
         likes.add(usuarioLikes);
     }
+
     @Override
     public String toString() {
         DateTimeFormatter dataFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");

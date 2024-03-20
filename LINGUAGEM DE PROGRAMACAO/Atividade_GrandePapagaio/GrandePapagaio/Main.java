@@ -10,14 +10,14 @@ public class Main {
     private static final int VERSEGUIDORES = 4;
     private static final int VERMEUMURAL = 5;
     private static final int VERMURALDEOUTRAPESSOA = 6;
-    private static final int DELETARPOST = 1; //TODO
-    private static final int EDITARPOST = 2; //TODO
-    private static final int DARLIKE = 1; //TODO
+    //TODO private static final int DELETARPOST = 1;
+    //TODO private static final int EDITARPOST = 2;
+    //TODO private static final int DARLIKE = 1;
     private static final int DESLOGAR = 9;
     private static final int SAIR = 0;
     private static Usuario logado = null;
     private static boolean status = true;
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         do {
@@ -66,14 +66,14 @@ public class Main {
         opMenuUsuario = entradaInteiros();
         switch (opMenuUsuario){
             case POSTAR:
-                try{
-                    System.out.println("Novo post: ");
-                    String conteudoNovoPost = entradaStrings();
+                System.out.println("Novo post: ");
+                String conteudoNovoPost = entradaStrings();
+                if (Post.isPostInvalido(conteudoNovoPost)){
+                    System.out.println("Post inválido!");
+                }else {
                     userLogado.novoPost(conteudoNovoPost);
                     System.out.println("Nova publicação.");
                     break;
-                }catch (IllegalArgumentException iae){
-                    System.out.println("Post inválido!");
                 }
                 break;
             case SEGUIR:
@@ -104,10 +104,10 @@ public class Main {
                 }
                 break;
             case VERMEUMURAL:
-                try{
-                    exibirMural(userLogado);
-                }catch (IllegalStateException iae){
+                if (userLogado.getMural().isEmpty()){
                     System.out.println("Você não tem nenhum conteúdo postado!");
+                }else{
+                    exibirMural(userLogado);
                 }
                 break;
             case VERMURALDEOUTRAPESSOA:
@@ -150,15 +150,15 @@ public class Main {
             System.out.println(user.getNome());
         }
     }
-    private static void exibirMural(Usuario userLogado) throws IllegalStateException {
+    private static void exibirMural(Usuario userLogado){
         for (Post post: userLogado.getMural()){
             System.out.println(">"+userLogado.getNome()+"-> "+post);
         }
-        if (!userLogado.getSeguindo().isEmpty()){
+        try{
             for (Usuario seguindor: userLogado.getSeguindo()){
                 exibirMuralOutroUsuario(seguindor.getMural(),seguindor.getNome());
             }
-        }
+        }catch (IllegalStateException ignored){}
     }
     private static void exibirMenuInicial() {
         System.out.println("====================================");
